@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exceed Connect | Intranet Home</title>
+    <!-- Modern Icon Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
@@ -35,60 +37,101 @@
         .top-banner {
             background-color: var(--banner-bg);
             color: #ffffff;
-            padding: 10px 24px;
+            padding: 12px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 100;
         }
 
         .banner-title {
-            font-size: 19.5px; /* 50% increase from 13px */
+            font-size: 19.5px; 
             font-weight: 800;
             letter-spacing: -0.01em;
         }
 
-        .top-banner a {
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-link {
             color: #c7d2fe;
             text-decoration: none;
             font-weight: 700;
-            font-size: 11px; /* Kept small */
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             transition: color 0.2s ease;
         }
 
-        .top-banner a:hover { color: #ffffff; }
+        .header-link:hover { color: #ffffff; }
 
-        header {
+        /* Full Width Announcement Bar */
+        .announcement-bar-container {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 24px 10px;
-            text-align: center;
+            margin: 12px auto 0;
+            padding: 0 24px;
         }
 
-        .header-description {
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--text-muted);
-            font-size: 1rem;
-            font-weight: 500;
-            line-height: 1.5;
+        .discreet-announcement {
+            background: white;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--highlight);
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .discreet-announcement:hover {
+            border-color: var(--highlight);
+            transform: translateY(-1px);
+        }
+
+        .announcement-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .announcement-label {
+            background: var(--highlight-light);
+            color: var(--highlight);
+            font-size: 8px;
+            font-weight: 900;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .announcement-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-main);
         }
 
         main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px 24px;
+            padding: 24px;
         }
 
         /* Split Ribbon Styles */
         .split-ribbon-container {
             display: flex;
             flex-direction: column;
-            gap: 24px;
-            padding: 20px 0;
+            gap: 16px;
+            padding: 12px 0;
             border-bottom: 1px solid var(--border);
-            margin-bottom: 24px;
+            margin-bottom: 12px;
         }
 
         @media (min-width: 900px) {
@@ -101,31 +144,23 @@
         .ribbon-section {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
             align-items: center;
             flex: 1;
         }
 
         .ribbon-label {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: var(--text-muted);
-            text-align: center;
         }
 
         .ribbon-icons {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            width: 100%;
-        }
-
-        /* Reporting Icons Spacing */
-        .reporting-icons {
-            gap: 20px; /* Condensed but balanced */
+            gap: 10px;
             justify-content: center;
         }
 
@@ -134,7 +169,7 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            gap: 4px;
+            gap: 2px;
             text-align: center;
             transition: transform 0.2s ease;
         }
@@ -142,8 +177,8 @@
         .ribbon-item:hover { transform: scale(1.1); }
 
         .ribbon-icon-wrapper {
-            width: 38px;
-            height: 38px;
+            width: 26px; 
+            height: 26px;
             background: #fff;
             border: 1px solid var(--border);
             border-radius: 50%;
@@ -154,19 +189,102 @@
         }
 
         .ribbon-text {
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: -0.02em;
         }
 
-        /* News Section Styles */
+        .reporting-icons {
+            gap: 16px;
+            justify-content: center;
+        }
+
+        /* Info Stack Layout */
+        .info-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        /* Events Tile Styles */
+        .events-tile {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        @media (min-width: 640px) {
+            .events-tile { grid-template-columns: 1fr 1fr; }
+        }
+
+        .events-tile::-webkit-scrollbar { width: 4px; }
+        .events-tile::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+        .event-item {
+            display: flex;
+            gap: 8px;
+            padding: 6px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 1px solid #f1f5f9;
+            background: #fff;
+            position: relative;
+        }
+
+        .event-item:hover { 
+            background: #f8fafc; 
+            border-color: var(--highlight); 
+        }
+
+        .event-priority { background: #fff9f5; border: 1px solid rgba(234, 91, 12, 0.3); }
+        
+        .priority-badge {
+            position: absolute;
+            top: -5px;
+            right: 5px;
+            background: var(--highlight);
+            color: white;
+            font-size: 6px;
+            font-weight: 900;
+            padding: 1px 4px;
+            border-radius: 3px;
+        }
+
+        .event-date-box {
+            width: 30px;
+            height: 30px;
+            background: var(--highlight-light);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--highlight);
+            flex-shrink: 0;
+        }
+
+        .event-date-day { font-size: 10px; font-weight: 800; }
+        .event-date-month { font-size: 7px; font-weight: 700; text-transform: uppercase; margin-top: -2px; }
+
+        .event-details { display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+        .event-title { font-size: 10.5px; font-weight: 700; color: var(--text-main); line-height: 1.2; }
+        .event-cat { font-size: 8px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+
+        /* News Section */
         .news-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 8px;
         }
 
         @media (min-width: 768px) {
@@ -176,55 +294,66 @@
         .news-card {
             background: #fff;
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 14px;
+            border-radius: 10px;
+            padding: 8px 12px;
             text-decoration: none;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            transition: all 0.3s ease;
+            gap: 4px;
+            transition: all 0.2s ease;
+            color: inherit;
         }
 
-        .news-card:hover {
+        .news-card[href]:hover {
             border-color: var(--highlight);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transform: translateY(-1px);
         }
 
-        .news-header-meta { display: flex; justify-content: space-between; align-items: center; }
-        .news-tag { font-size: 9px; font-weight: 800; color: var(--highlight); text-transform: uppercase; letter-spacing: 0.05em; }
-        .news-headline { font-size: 14px; font-weight: 700; color: var(--text-main); margin: 0; line-height: 1.3; }
-        .news-date { font-size: 11px; color: var(--text-muted); }
-        .news-source-icon { width: 14px; height: 14px; color: var(--text-muted); opacity: 0.7; }
+        .news-header-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .news-tag { font-size: 8px; font-weight: 800; color: var(--highlight); text-transform: uppercase; }
+        
+        .news-source-icon { 
+            width: 12px !important; 
+            height: 12px !important; 
+            color: var(--text-muted); 
+            opacity: 0.6;
+            flex-shrink: 0;
+        }
+
+        .news-headline { font-size: 12px; font-weight: 700; color: var(--text-main); margin: 0; line-height: 1.2; }
+        .news-date { font-size: 10px; color: var(--text-muted); }
 
         .view-more-news {
             display: block;
             text-align: right;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             color: var(--highlight);
             text-decoration: none;
-            margin-bottom: 24px;
+            margin-top: 8px;
             padding-right: 8px;
         }
 
-        /* Section Headings */
-        .section-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; margin-left: 8px; }
-        .section-indicator { width: 4px; height: 16px; background: var(--highlight); border-radius: 4px; }
-        .section-title { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin: 0; }
+        /* Hub Grids Styling */
+        .section-header { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; margin-left: 8px; }
+        .section-indicator { width: 3px; height: 14px; background: var(--highlight); border-radius: 2px; }
+        .section-title { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin: 0; }
 
-        /* Grid Base */
-        .grid { display: grid; gap: 10px; margin-bottom: 24px; }
+        .grid { display: grid; gap: 8px; margin-bottom: 20px; }
         .grid-6 { grid-template-columns: repeat(2, 1fr); }
         @media (min-width: 768px) { .grid-6 { grid-template-columns: repeat(6, 1fr); } }
 
-        /* Card Styles */
         .glass-card {
             background-color: #ffffff;
-            background-image: radial-gradient(#f1f5f9 0.5px, transparent 0.5px);
-            background-size: 10px 10px;
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 10px;
+            border-radius: 12px;
+            padding: 12px;
             text-decoration: none;
             display: flex;
             flex-direction: column;
@@ -234,30 +363,94 @@
             transition: all 0.3s ease;
             height: 100%;
             box-sizing: border-box;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
 
-        .glass-card:hover { transform: translateY(-2px); border-color: var(--highlight); }
-        .icon-box { padding: 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
-        .card-text { font-size: 11px; font-weight: 700; color: var(--text-main); word-wrap: break-word; }
-        .hub-solutions .glass-card { align-items: flex-start; text-align: left; border-left: 3px solid var(--highlight); padding: 12px; }
+        .glass-card:hover { transform: translateY(-2px); border-color: var(--highlight); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        
+        .icon-box { 
+            padding: 8px; 
+            border-radius: 10px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,1), 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .card-text { font-size: 10px; font-weight: 700; color: var(--text-main); word-wrap: break-word; }
 
-        /* FAQ Styles */
-        .faq-container { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .hub-solutions .glass-card,
+        .activity-monitoring .glass-card { border-left: 3px solid var(--highlight); }
+
+        /* Modal Styles */
+        #event-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: modalFadeIn 0.3s ease-out;
+            border: 1px solid var(--border);
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header { padding: 16px 24px 10px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: flex-start; }
+        .modal-close { background: #f1f5f9; border: none; border-radius: 50%; width: 26px; height: 26px; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; }
+        .modal-body { padding: 16px 24px 24px; }
+        .modal-cat { font-size: 9px; font-weight: 800; color: var(--highlight); text-transform: uppercase; margin-bottom: 4px; display: block; }
+        .modal-title { font-size: 18px; font-weight: 800; color: var(--text-main); margin-bottom: 8px; }
+        .modal-date { font-size: 12px; font-weight: 600; color: var(--blue); margin-bottom: 12px; display: flex; align-items: center; gap: 4px; }
+        .modal-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; white-space: pre-wrap; }
+
+        /* FAQs & Support */
+        .faq-container { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
         @media (min-width: 768px) { .faq-container { grid-template-columns: 2fr 1fr; } }
-        details { background: #fff; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; padding: 12px; }
-        summary { font-weight: 700; font-size: 13px; color: var(--text-main); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: '+'; font-size: 16px; color: var(--text-muted); }
-        details[open] summary::after { content: '−'; }
-        .answer { font-size: 11px; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }
+        
+        details { background: #ffffff; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; }
+        summary { font-weight: 700; font-size: 12px; color: var(--text-main); cursor: pointer; list-style: none; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+        summary::after { content: '+'; font-size: 14px; color: var(--text-muted); }
+        
+        .answer { font-size: 11px; color: var(--text-muted); padding: 0 14px 10px; border-top: 1px solid #f8fafc; }
 
-        /* Support Box */
-        .support-box { background: #1e1b4b; color: #fff; border-radius: 16px; padding: 24px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
-        .support-box h3 { margin: 0 0 8px; font-size: 20px; }
-        .support-box p { margin: 0 0 16px; color: #c7d2fe; font-size: 13px; }
-        .btn-email { display: flex; align-items: center; gap: 10px; background: rgba(49, 46, 129, 0.5); padding: 12px; border-radius: 10px; border: 1px solid rgba(67, 56, 202, 0.5); color: #fff; text-decoration: none; font-weight: 700; font-size: 13px; transition: background 0.2s; }
+        .support-box { 
+            background: #1e1b4b; 
+            color: #fff; 
+            border-radius: 12px; 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            height: fit-content;
+        }
+        .support-box h3 { margin: 0 0 4px; font-size: 16px; font-weight: 800; }
+        .support-box p { margin: 0 0 12px; color: #c7d2fe; font-size: 11px; }
+        .btn-email { display: flex; align-items: center; justify-content: center; gap: 6px; background: rgba(255, 255, 255, 0.1); padding: 8px; border-radius: 8px; color: #fff; text-decoration: none; font-weight: 700; font-size: 11px; transition: all 0.2s; }
+        .btn-email:hover { background: rgba(255, 255, 255, 0.2); }
 
-        .svg-icon { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        /* Icon Utility */
+        .icon-lg { width: 18px !important; height: 18px !important; }
+        .icon-sm { width: 14px !important; height: 14px !important; }
     </style>
 </head>
 <body>
@@ -265,191 +458,165 @@
     <!-- Top Level Banner -->
     <div class="top-banner">
         <span class="banner-title">Welcome to Exceed Connect</span>
-        <a id="link-banner-faq" href="#">What is Exceed Connect?</a>
+        <div class="header-actions">
+            <div id="header-announcement"></div> <!-- Dynamic Announcement Slot -->
+            <a id="link-banner-faq" class="header-link" href="#">What is Exceed Connect?</a>
+        </div>
     </div>
 
-    <header>
-        <p class="header-description">The Trust's online platform that provides colleagues with access to a range of information and connect with each other.</p>
-    </header>
+    <!-- Full Width Announcement Bar -->
+    <div id="full-announcement-bar" class="announcement-bar-container"></div>
 
     <main>
-        <!-- SPLIT RIBBON CONTAINER -->
+        <!-- NAVIGATION RIBBONS -->
         <div class="split-ribbon-container">
-            <!-- PRODUCTIVITY (LEFT) -->
             <div class="ribbon-section">
                 <div class="ribbon-label">Productivity</div>
                 <div class="ribbon-icons">
                     <a id="link-gmail" href="#" class="ribbon-item">
-                        <div class="ribbon-icon-wrapper">
-                            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M20 18h-2V8l-6 5-6-5v10H4V6l8 6 8-6z"/><path fill="#EA4335" d="M20 6v12h-2V8l-6 5-6-5v10H4V6c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2z"/></svg>
-                        </div>
+                        <div class="ribbon-icon-wrapper"><i data-lucide="mail" class="icon-sm" style="color:#4285F4"></i></div>
                         <span class="ribbon-text">Gmail</span>
                     </a>
                     <a id="link-calendar" href="#" class="ribbon-item">
-                        <div class="ribbon-icon-wrapper">
-                            <svg width="20" height="20" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" fill="#4285F4" rx="2"/><path fill="#FFF" d="M7 11h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2zM7 15h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/><path fill="#FFF" d="M18 3v2H6V3h12zm0 4v2H6V7h12z" opacity=".3"/></svg>
-                        </div>
+                        <div class="ribbon-icon-wrapper"><i data-lucide="calendar" class="icon-sm" style="color:#4285F4"></i></div>
                         <span class="ribbon-text">Calendar</span>
                     </a>
                     <a id="link-docs" href="#" class="ribbon-item">
-                        <div class="ribbon-icon-wrapper">
-                            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M16 2H8C6.9 2 6 2.9 6 4v16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 16H9v-2h6v2zm0-4H9v-2h6v2zm0-4H9V8h6v2z"/></svg>
-                        </div>
+                        <div class="ribbon-icon-wrapper"><i data-lucide="file-text" class="icon-sm" style="color:#4285F4"></i></div>
                         <span class="ribbon-text">Docs</span>
                     </a>
                     <a id="link-sheets" href="#" class="ribbon-item">
-                        <div class="ribbon-icon-wrapper">
-                            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#0F9D58" d="M16 2H8C6.9 2 6 2.9 6 4v16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM10 18H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V8h2v2zm6 8h-4v-2h4v2zm0-4h-4v-2h4v2zm0-4h-4V8h4v2z"/></svg>
-                        </div>
+                        <div class="ribbon-icon-wrapper"><i data-lucide="table-2" class="icon-sm" style="color:#0F9D58"></i></div>
                         <span class="ribbon-text">Sheets</span>
                     </a>
                     <a id="link-slides" href="#" class="ribbon-item">
-                        <div class="ribbon-icon-wrapper">
-                            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#F4B400" d="M16 2H8C6.9 2 6 2.9 6 4v16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 12H9V6h6v8z"/></svg>
-                        </div>
+                        <div class="ribbon-icon-wrapper"><i data-lucide="presentation" class="icon-sm" style="color:#F4B400"></i></div>
                         <span class="ribbon-text">Slides</span>
                     </a>
                     <a id="link-drive" href="#" class="ribbon-item">
-                        <div class="ribbon-icon-wrapper">
-                            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FFC107" d="M15.5 16.5l-5 8.5h11l5-8.5z"/><path fill="#2196F3" d="M9.5 25l5-8.5-5.5-9.5-5 8.5z"/><path fill="#4CAF50" d="M4 7l5.5 9.5 11-19H4z"/></svg>
-                        </div>
+                        <div class="ribbon-icon-wrapper"><i data-lucide="hard-drive" class="icon-sm" style="color:#4285F4"></i></div>
                         <span class="ribbon-text">Drive</span>
                     </a>
                     <a id="link-arbor" href="#" class="ribbon-item">
-                        <div class="ribbon-icon-wrapper">
-                            <svg class="svg-icon" style="color:var(--amber)" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
-                        </div>
-                        <span class="ribbon-text">Arbor MIS</span>
+                        <div class="ribbon-icon-wrapper"><i data-lucide="database" class="icon-sm" style="color:var(--amber)"></i></div>
+                        <span class="ribbon-text">Arbor</span>
                     </a>
                 </div>
             </div>
 
-            <!-- REPORTING (RIGHT) -->
             <div class="ribbon-section">
                 <div class="ribbon-label">Reporting</div>
                 <div class="ribbon-icons reporting-icons">
                     <a id="link-it-support" href="#" class="ribbon-item">
-                        <div class="ribbon-icon-wrapper">
-                            <svg class="svg-icon" style="color:var(--text-muted)" viewBox="0 0 24 24"><path d="M2 9V5.2A1.2 1.2 0 0 1 3.2 4H20.8A1.2 1.2 0 0 1 22 5.2V9"/><path d="M2 15V18.8A1.2 1.2 0 0 0 3.2 20H20.8A1.2 1.2 0 0 0 22 18.8V15"/><rect width="20" height="8" x="2" y="8" rx="2"/></svg>
-                        </div>
+                        <div class="ribbon-icon-wrapper"><i data-lucide="laptop" class="icon-sm" style="color:var(--text-muted)"></i></div>
                         <span class="ribbon-text">IT Support</span>
                     </a>
                     <a id="link-breach" href="#" class="ribbon-item">
-                        <div class="ribbon-icon-wrapper">
-                            <svg class="svg-icon" style="color:var(--rose)" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <span class="ribbon-text">Data Breach</span>
+                        <div class="ribbon-icon-wrapper"><i data-lucide="shield-alert" class="icon-sm" style="color:var(--rose)"></i></div>
+                        <span class="ribbon-text">Breach</span>
                     </a>
                     <a id="link-accident" href="#" class="ribbon-item">
-                        <div class="ribbon-icon-wrapper">
-                            <svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M12 11h.01"/><path d="M12 15h.01"/><path d="M12 7h.01"/></svg>
-                        </div>
+                        <div class="ribbon-icon-wrapper"><i data-lucide="activity" class="icon-sm" style="color:var(--highlight)"></i></div>
                         <span class="ribbon-text">Accident</span>
                     </a>
                     <a id="link-complaints" href="#" class="ribbon-item">
-                        <div class="ribbon-icon-wrapper">
-                            <svg class="svg-icon" style="color:var(--blue)" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h6"/></svg>
-                        </div>
+                        <div class="ribbon-icon-wrapper"><i data-lucide="message-square-warning" class="icon-sm" style="color:var(--blue)"></i></div>
                         <span class="ribbon-text">Complaints</span>
+                    </a>
+                    <a id="link-sar" href="#" class="ribbon-item">
+                        <div class="ribbon-icon-wrapper"><i data-lucide="user-search" class="icon-sm" style="color:var(--emerald)"></i></div>
+                        <span class="ribbon-text">SAR</span>
+                    </a>
+                    <a id="link-foi" href="#" class="ribbon-item">
+                        <div class="ribbon-icon-wrapper"><i data-lucide="file-search" class="icon-sm" style="color:var(--text-muted)"></i></div>
+                        <span class="ribbon-text">FOI</span>
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- ORGANISATION NEWS -->
-        <section>
-            <div class="section-header">
-                <div class="section-indicator"></div>
-                <h2 class="section-title">Organisation News</h2>
-            </div>
-            <div class="news-grid" id="news-container">
-                <div style="font-size: 11px; color: var(--text-muted); padding-left: 8px;">Loading latest news...</div>
-            </div>
-            <a id="link-news-archive" href="#" class="view-more-news">View All News Items ➜</a>
-        </section>
-        
-        <!-- CORE NAVIGATION -->
+        <!-- INFO STACK -->
+        <div class="info-stack">
+            <section>
+                <div class="section-header"><div class="section-indicator" style="background: var(--blue);"></div><h2 class="section-title">Headline Activities - This Term</h2></div>
+                <div class="events-tile" id="events-container">
+                    <div style="font-size: 11px; color: var(--text-muted); grid-column: span 2;">Fetching latest activities...</div>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-header"><div class="section-indicator"></div><h2 class="section-title">Organisation News</h2></div>
+                <div class="news-grid" id="news-container">
+                    <div style="font-size: 11px; color: var(--text-muted); padding-left: 8px;">Loading news...</div>
+                </div>
+                <a id="link-news-archive" href="#" class="view-more-news">View All News Items ➜</a>
+            </section>
+        </div>
+
+        <!-- COLLEAGUE ESSENTIALS GRID (Welcome First, Leadership Middle) -->
         <section>
             <div class="section-header"><div class="section-indicator"></div><h2 class="section-title">Colleague Essentials</h2></div>
             <div class="grid grid-6">
-                <a id="link-myelp" href="#" class="glass-card">
-                    <div class="icon-box" style="background:var(--highlight-light);color:var(--highlight)"><svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></div>
-                    <span class="card-text">My ELP</span>
-                </a>
-                <a id="link-wellbeing" href="#" class="glass-card">
-                    <div class="icon-box" style="background:#fff1f2;color:var(--rose)"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
-                    <span class="card-text">Wellbeing</span>
-                </a>
-                <a id="link-ess-news" href="#" class="glass-card">
-                    <div class="icon-box" style="background:#eff6ff;color:var(--blue)"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg></div>
-                    <span class="card-text">Latest News</span>
-                </a>
-                <a id="link-guide" href="#" class="glass-card">
-                    <div class="icon-box" style="background:#f8fafc;color:var(--text-muted)"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-                    <span class="card-text">ELP Guide</span>
-                </a>
-                <a id="link-leadership" href="#" class="glass-card">
-                    <div class="icon-box" style="background:var(--highlight-light);color:var(--highlight)"><svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
-                    <span class="card-text">Leadership Framework</span>
-                </a>
-                <a id="link-events" href="#" class="glass-card">
-                    <div class="icon-box" style="background:var(--highlight-light);color:var(--highlight-dark)"><svg class="svg-icon" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg></div>
-                    <span class="card-text">Trust Events</span>
-                </a>
+                <a id="link-welcome" href="#" class="glass-card"><div class="icon-box" style="color:var(--highlight)"><i data-lucide="home" class="icon-lg"></i></div><span class="card-text">Welcome to Exceed Connect</span></a>
+                <a id="link-myelp" href="#" class="glass-card"><div class="icon-box" style="color:var(--highlight)"><i data-lucide="user-circle" class="icon-lg"></i></div><span class="card-text">My ELP</span></a>
+                <a id="link-leadership" href="#" class="glass-card"><div class="icon-box" style="color:var(--highlight)"><i data-lucide="award" class="icon-lg"></i></div><span class="card-text">Leadership Framework</span></a>
+                <a id="link-wellbeing" href="#" class="glass-card"><div class="icon-box" style="color:var(--rose)"><i data-lucide="heart" class="icon-lg"></i></div><span class="card-text">Wellbeing</span></a>
+                <a id="link-guide" href="#" class="glass-card"><div class="icon-box" style="color:var(--text-muted)"><i data-lucide="book-open" class="icon-lg"></i></div><span class="card-text">ELP Guide</span></a>
+                <a id="link-events" href="#" class="glass-card"><div class="icon-box" style="color:var(--highlight-dark)"><i data-lucide="calendar-days" class="icon-lg"></i></div><span class="card-text">Trust Events and Sports Calendar</span></a>
             </div>
         </section>
 
-        <!-- EXCEED SOLUTIONS HUB -->
         <section class="hub-solutions">
             <div class="section-header"><div class="section-indicator"></div><h2 class="section-title">Exceed Solutions</h2></div>
             <div class="grid grid-6">
-                <a id="link-sol-comms" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="card-text">Communications</span></a>
-                <a id="link-sol-data" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="card-text">Data Security</span></a>
-                <a id="link-sol-tech" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><rect width="18" height="14" x="3" y="5" rx="2"/><path d="M7 10h10M7 14h10"/></svg><span class="card-text">Digital Technologies</span></a>
-                <a id="link-sol-estates" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="card-text">Estates</span></a>
-                <a id="link-sol-finance" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg><span class="card-text">Finance</span></a>
-                <a id="link-gov-main" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="card-text">Governance</span></a>
-                <a id="link-gov-legal" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg><span class="card-text">Legal</span></a>
-                <a id="link-sol-people" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="M18 8a3 3 0 0 0-3-3H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8Z"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M6 12h.01"/></svg><span class="card-text">People</span></a>
-                <a id="link-sol-policy" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg><span class="card-text">Policy</span></a>
-                <a id="link-sol-safeguarding" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg><span class="card-text">Safeguarding</span></a>
-                <a id="link-sol-school-imp" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/></svg><span class="card-text">School Improvement</span></a>
-                <a id="link-sol-all" href="#" class="glass-card" style="background:#fff"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="M12 3v19M3 12h18"/><path d="M5 5l14 14M19 5L5 14"/></svg><span class="card-text">All Solutions</span></a>
+                <a id="link-sol-comms" href="#" class="glass-card"><div class="icon-box"><i data-lucide="megaphone" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Communications</span></a>
+                <a id="link-sol-data" href="#" class="glass-card"><div class="icon-box"><i data-lucide="lock" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Data Security</span></a>
+                <a id="link-sol-tech" href="#" class="glass-card"><div class="icon-box"><i data-lucide="cpu" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Digital Tech</span></a>
+                <a id="link-sol-estates" href="#" class="glass-card"><div class="icon-box"><i data-lucide="home" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Estates</span></a>
+                <a id="link-sol-finance" href="#" class="glass-card"><div class="icon-box"><i data-lucide="banknote" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Finance</span></a>
+                <a id="link-gov-main" href="#" class="glass-card"><div class="icon-box"><i data-lucide="gavel" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Governance</span></a>
+                <a id="link-gov-legal" href="#" class="glass-card"><div class="icon-box"><i data-lucide="scale" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Legal</span></a>
+                <a id="link-sol-people" href="#" class="glass-card"><div class="icon-box"><i data-lucide="users" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">People</span></a>
+                <a id="link-sol-policy" href="#" class="glass-card"><div class="icon-box"><i data-lucide="file-check" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Policy</span></a>
+                <a id="link-sol-safeguarding" href="#" class="glass-card"><div class="icon-box"><i data-lucide="shield-check" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Safeguarding</span></a>
+                <a id="link-sol-pd" href="#" class="glass-card"><div class="icon-box"><i data-lucide="brain-circuit" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Professional Learning</span></a>
+                <a id="link-sol-audit" href="#" class="glass-card"><div class="icon-box"><i data-lucide="clipboard-check" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Audit</span></a>
+                <a id="link-sol-school-imp" href="#" class="glass-card"><div class="icon-box"><i data-lucide="trending-up" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">School Imp.</span></a>
+                <a id="link-sol-all" href="#" class="glass-card" style="background:#fff"><div class="icon-box"><i data-lucide="layout-grid" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">What is Exceed Solutions?</span></a>
             </div>
         </section>
 
-        <!-- PROFESSIONAL DEVELOPMENT -->
-        <section>
-            <div class="section-header"><div class="section-indicator" style="background:var(--text-muted)"></div><h2 class="section-title">Professional Development</h2></div>
+        <!-- NEW ACTIVITY & MONITORING SECTION -->
+        <section class="activity-monitoring">
+            <div class="section-header"><div class="section-indicator" style="background:var(--emerald)"></div><h2 class="section-title">Activity & Monitoring</h2></div>
             <div class="grid grid-6">
-                <a id="link-pd-annual" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg><span class="card-text">Annual Training</span></a>
-                <a id="link-pd-learning" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg><span class="card-text">Professional Learning</span></a>
-                <a id="link-pd-linkedin" href="#" class="glass-card"><svg class="svg-icon" style="color:var(--highlight)" viewBox="0 0 24 24"><path stroke="none" fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg><span class="card-text">LinkedIn Learning</span></a>
+                <a id="link-act-accountability" href="#" class="glass-card"><div class="icon-box"><i data-lucide="check-square" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Accountability Framework</span></a>
+                <a id="link-act-workflow" href="#" class="glass-card"><div class="icon-box"><i data-lucide="git-branch" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Central Team Work Flow Deployment</span></a>
+                <a id="link-act-calendar" href="#" class="glass-card"><div class="icon-box"><i data-lucide="calendar-range" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Trust Operating Calendar</span></a>
+                <a id="link-act-trackers" href="#" class="glass-card"><div class="icon-box"><i data-lucide="bar-chart-3" class="icon-lg" style="color:var(--highlight)"></i></div><span class="card-text">Academy Trackers</span></a>
             </div>
         </section>
 
-        <!-- FAQs & Support -->
         <section class="faq-container">
             <div>
                 <div class="section-header"><div class="section-indicator"></div><h2 class="section-title">FAQs</h2></div>
                 <details><summary>Annual Training Access?</summary><div class="answer">Click 'Annual Training' and log in with ELP Google credentials.</div></details>
                 <details><summary>Trust Policies?</summary><div class="answer">Statutory policies are located in the 'Exceed Policy' hub.</div></details>
-                <details><summary>Digital Support?</summary><div class="answer">Log a support ticket via the IT Support Request button in the Reporting tray.</div></details>
-                <details><summary>Reporting an Accident?</summary><div class="answer">All staff must record workplace accidents or near-misses immediately using the 'Accident' button in the Reporting tray.</div></details>
-                <details><summary>Managing a Complaint?</summary><div class="answer">For guidance on handling formal complaints, please access the 'Managing Complaints' resource in the Reporting section.</div></details>
-                <details><summary>Accessing Professional Learning?</summary><div class="answer">Visit the Professional Learning section to view available CPD pathways, Trust-wide development days, and LinkedIn Learning access.</div></details>
+                <details><summary>Digital Support?</summary><div class="answer">Log a support ticket via the IT Support Request button.</div></details>
             </div>
             <div class="support-box">
-                <svg class="svg-icon" style="width:36px;height:36px;opacity:0.2;position:absolute;bottom:-8px;right:-8px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
-                <h3>Need Help?</h3><p>Contact central support for navigation assistance.</p>
-                <a href="mailto:connect@elp.org.uk" class="btn-email"><svg class="svg-icon" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Email Support</a>
+                <h3>Need Help?</h3><p>Contact central support for assistance.</p>
+                <a href="mailto:itsupport@elp.org.uk" class="btn-email"><i data-lucide="mail" class="icon-sm"></i> Email Support</a>
             </div>
         </section>
     </main>
 
+    <!-- EVENT MODAL -->
+    <div id="event-modal"><div class="modal-content"><div class="modal-header"><div><span id="modal-cat" class="modal-cat"></span><h3 id="modal-title" class="modal-title"></h3><div id="modal-date" class="modal-date"><i data-lucide="calendar" class="icon-sm"></i><span></span></div></div><button class="modal-close" onclick="closeModal()">×</button></div><div class="modal-body"><p id="modal-context" class="modal-desc"></p></div></div></div>
+
     <script>
         const URL_CONFIG = {
-            "link-banner-faq": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/elp-connect-faqs", target: "_blank" },
+            "link-banner-faq": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/elp-connect-faqs", target: "_self" },
             "link-gmail": { url: "https://mail.google.com", target: "_blank" },
             "link-calendar": { url: "https://calendar.google.com", target: "_blank" },
             "link-docs": { url: "https://docs.google.com", target: "_blank" },
@@ -461,84 +628,142 @@
             "link-breach": { url: "https://breach.example.com", target: "_blank" },
             "link-accident": { url: "https://accident.example.com", target: "_blank" },
             "link-complaints": { url: "https://complaints.example.com", target: "_blank" },
-            "link-myelp": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/my-elp", target: "_blank" },
-            "link-wellbeing": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/wellbeing-services", target: "_blank" },
-            "link-ess-news": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/news-coming-soon", target: "_blank" },
-            "link-news-archive": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/news-archive", target: "_blank" },
-            "link-guide": { url: "https://sites.google.com/hallcrossacademy.co.uk/theelpguide/home", target: "_blank" },
-            "link-leadership": { url: "https://sites.google.com/elp.org.uk/leadershipframework?usp=sharing", target: "_blank" },
-            "link-events": { url: "https://sites.google.com/hallcrossacademy.co.uk/theelpguide/home", target: "_blank" },
-            "link-sol-comms": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/departments/exceed-communications", target: "_blank" },
-            "link-sol-data": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/exceed-data-security-hub", target: "_blank" },
-            "link-sol-tech": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/exceed-technology", target: "_blank" },
-            "link-sol-estates": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-estates", target: "_blank" },
-            "link-sol-finance": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/exceed-financial", target: "_blank" },
-            "link-sol-people": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/exceed-people", target: "_blank" },
-            "link-sol-policy": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/policy-insight", target: "_blank" },
-            "link-sol-safeguarding": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/safeguarding", target: "_blank" },
-            "link-sol-school-imp": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-school-improvement", target: "_blank" },
-            "link-sol-all": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions", target: "_blank" },
-            "link-gov-main": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/governance-hub", target: "_blank" },
-            "link-gov-legal": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/departments/exceed-legal", target: "_blank" },
-            "link-pd-annual": { url: "#", target: "_blank" },
-            "link-pd-learning": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/professional-learning", target: "_blank" },
-            "link-pd-linkedin": { url: "https://www.linkedin.com/learning", target: "_blank" }
+            "link-sar": { url: "#", target: "_self" },
+            "link-foi": { url: "#", target: "_self" },
+            "link-welcome": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/about-exceed-connect", target: "_self" },
+            "link-myelp": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/my-elp" },
+            "link-wellbeing": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/wellbeing-services", target: "_self" },
+            "link-news-archive": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/news-archive", target: "_self" },
+            "link-guide": { url: "https://sites.google.com/hallcrossacademy.co.uk/theelpguide/home", target: "_self" },
+            "link-leadership": { url: "https://sites.google.com/elp.org.uk/leadershipframework?usp=sharing", target: "_self" },
+            "link-events": { url: "https://sites.google.com/hallcrossacademy.co.uk/theelpguide/home", target: "_self" },
+            "link-sol-comms": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/departments/exceed-communications", target: "_self" },
+            "link-sol-data": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/exceed-data-security-hub", target: "_self" },
+            "link-sol-tech": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/exceed-technology", target: "_self" },
+            "link-sol-estates": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-estates", target: "_self" },
+            "link-sol-finance": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/exceed-financial", target: "_self" },
+            "link-sol-people": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/exceed-people", target: "_self" },
+            "link-sol-policy": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/policy-insight", target: "_self" },
+            "link-sol-safeguarding": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/safeguarding", target: "_self" },
+            "link-sol-school-imp": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-school-improvement", target: "_self" },
+            "link-sol-pd": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/professional-learning", target: "_self" },
+            "link-sol-audit": { url: "#", target: "_self" },
+            "link-sol-all": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions", target: "_self" },
+            "link-gov-main": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/governance-hub", target: "_self" },
+            "link-gov-legal": { url: "https://sites.google.com/exceedlp.org.uk/exceedconnect/exceed-solutions/departments/exceed-legal", target: "_self" },
+            "link-act-accountability": { url: "#", target: "_self" },
+            "link-act-workflow": { url: "#", target: "_self" },
+            "link-act-calendar": { url: "#", target: "_self" },
+            "link-act-trackers": { url: "#", target: "_self" }
         };
 
-        const ICONS = {
-            internal: '<svg class="news-source-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
-            external: '<svg class="news-source-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20"/><path d="M12 2a14.5 14.5 0 0 1 0 20"/><path d="M2 12h20"/></svg>'
+        const NEWS_ICONS = {
+            internal: '<i data-lucide="home" class="news-source-icon"></i>',
+            external: '<i data-lucide="globe" class="news-source-icon"></i>'
         };
 
-        function applyConfigLinks() {
-            for (const id in URL_CONFIG) {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.href = URL_CONFIG[id].url;
-                    element.target = URL_CONFIG[id].target;
+        function showEventContext(title, date, cat, context) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-date').querySelector('span').innerText = date;
+            document.getElementById('modal-cat').innerText = cat;
+            document.getElementById('modal-context').innerHTML = context || "No additional context available.";
+            document.getElementById('event-modal').style.display = 'flex';
+            lucide.createIcons();
+        }
+
+        function closeModal() { document.getElementById('event-modal').style.display = 'none'; }
+        window.onclick = function(event) { if (event.target == document.getElementById('event-modal')) closeModal(); }
+
+        async function fetchAnnouncements() {
+            const container = document.getElementById('full-announcement-bar');
+            const csvUrl = 'https://docs.google.com/spreadsheets/d/1PhZXVKbASeiETb5XQEhXwD4ULZ2aUb2_Og8dZ9_qvVM/export?format=csv&gid=1136358601';
+            try {
+                const response = await fetch(csvUrl);
+                const csvText = await response.text();
+                const rows = csvText.split(/\r?\n/).filter(row => row.trim() !== '').slice(1);
+                if (rows.length === 0) return;
+                
+                const cols = rows[0].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                const title = cols[0]?.replace(/^"|"$/g, '').trim();
+                const content = cols[1]?.replace(/^"|"$/g, '').trim();
+                const url = cols[2]?.replace(/^"|"$/g, '').trim();
+
+                if (title && content) {
+                    container.innerHTML = `
+                        <a href="${url || '#'}" ${url ? 'target="_blank"' : 'onclick="return false;"'} class="discreet-announcement">
+                            <div class="announcement-info">
+                                <span class="announcement-label">Colleague Action</span>
+                                <span class="announcement-text"><strong>${title}:</strong> ${content}</span>
+                            </div>
+                            <i data-lucide="chevron-right" class="icon-sm" style="color:var(--text-muted)"></i>
+                        </a>`;
+                    lucide.createIcons();
                 }
-            }
+            } catch (e) {}
         }
 
         async function fetchNews() {
             const container = document.getElementById('news-container');
             const csvUrl = 'https://docs.google.com/spreadsheets/d/1PhZXVKbASeiETb5XQEhXwD4ULZ2aUb2_Og8dZ9_qvVM/export?format=csv';
-            
             try {
                 const response = await fetch(csvUrl);
-                if (!response.ok) throw new Error('Network error');
                 const csvText = await response.text();
-                const rows = csvText.split(/\r?\n/).filter(row => row.trim() !== '');
-                const newsItems = rows.slice(1);
-                
-                if (newsItems.length === 0) {
-                    container.innerHTML = '<div style="font-size: 11px; color: var(--text-muted); padding-left: 8px;">No current news items.</div>';
-                    return;
-                }
-
+                const rows = csvText.split(/\r?\n/).filter(row => row.trim() !== '').slice(1);
                 let html = '';
-                newsItems.forEach(row => {
+                rows.forEach(row => {
                     const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     if (cols.length >= 3) {
                         const title = cols[0].replace(/^"|"$/g, '').trim();
-                        const date = cols[1].replace(/^"|"$/g, '').trim();
                         const headline = cols[2].replace(/^"|"$/g, '').trim();
-                        const url = (cols[3] ? cols[3].replace(/^"|"$/g, '').trim() : '#');
+                        const date = cols[1].replace(/^"|"$/g, '').trim();
+                        let url = (cols[3] ? cols[3].replace(/^"|"$/g, '').trim() : '');
                         const source = (cols[4] ? cols[4].replace(/^"|"$/g, '').trim().toLowerCase() : 'internal');
-                        const sourceIcon = source === 'external' ? ICONS.external : ICONS.internal;
-
-                        html += `<a href="${url}" ${url !== '#' ? 'target="_blank"' : ''} class="news-card"><div class="news-header-meta"><span class="news-tag">${title}</span>${sourceIcon}</div><h3 class="news-headline">${headline}</h3><span class="news-date">${date}</span></a>`;
+                        const isLink = url && url !== '#' && url !== '';
+                        const tag = isLink ? 'a' : 'div';
+                        const attrs = isLink ? `href="${url}" target="_blank"` : '';
+                        html += `<${tag} ${attrs} class="news-card"><div class="news-header-meta"><span class="news-tag">${title}</span>${source === 'external' ? NEWS_ICONS.external : NEWS_ICONS.internal}</div><h3 class="news-headline">${headline}</h3><span class="news-date">${date}</span></${tag}>`;
                     }
                 });
-                container.innerHTML = html;
-            } catch (err) {
-                container.innerHTML = '<div style="font-size: 11px; color: var(--rose); padding-left: 8px;">Failed to load latest news.</div>';
-            }
+                container.innerHTML = html || '<div style="font-size: 11px;">No current news items.</div>';
+                lucide.createIcons();
+            } catch (err) { container.innerHTML = '<div style="font-size: 11px;">Error loading news.</div>'; }
+        }
+
+        async function fetchEvents() {
+            const container = document.getElementById('events-container');
+            const csvUrl = 'https://docs.google.com/spreadsheets/d/1PhZXVKbASeiETb5XQEhXwD4ULZ2aUb2_Og8dZ9_qvVM/export?format=csv&gid=885210101';
+            try {
+                const response = await fetch(csvUrl);
+                const csvText = await response.text();
+                const rows = csvText.split(/\r?\n/).filter(row => row.trim() !== '').slice(1).slice(0, 10);
+                let html = '';
+                rows.forEach(row => {
+                    const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    if (cols.length >= 3) {
+                        let title = cols[0].replace(/^"|"$/g, '').trim();
+                        const dateRaw = cols[1].replace(/^"|"$/g, '').trim();
+                        const category = cols[2].replace(/^"|"$/g, '').trim();
+                        const priority = (cols[3] ? cols[3].replace(/^"|"$/g, '').trim().toLowerCase() : 'no');
+                        const context = (cols[4] ? cols[4].replace(/^"|"$/g, '').trim() : '');
+                        const fullTitle = title;
+                        if (title.length > 65) title = title.substring(0, 62) + '...';
+                        const parts = dateRaw.split('/');
+                        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                        const isPriority = priority === 'yes';
+                        html += `<div class="event-item ${isPriority ? 'event-priority' : ''}" onclick="showEventContext('${fullTitle.replace(/'/g, "\\'")}', '${dateRaw}', '${category}', '${context.replace(/'/g, "\\'").replace(/\n/g, "<br>")}')">${isPriority ? '<span class="priority-badge">Priority</span>' : ''}<div class="event-date-box"><span class="event-date-day">${parts[0]}</span><span class="event-date-month">${months[parseInt(parts[1])-1] || '???'}</span></div><div class="event-details"><span class="event-cat">${category}</span><span class="event-title">${title}</span></div></div>`;
+                    }
+                });
+                container.innerHTML = html || '<div style="font-size: 11px; grid-column: span 2;">No activities scheduled.</div>';
+            } catch (err) { container.innerHTML = '<div style="font-size: 11px; grid-column: span 2;">Error loading events.</div>'; }
         }
         
         window.addEventListener('DOMContentLoaded', () => {
-            applyConfigLinks();
-            fetchNews();
+            for (const id in URL_CONFIG) {
+                const el = document.getElementById(id);
+                if (el) { el.href = URL_CONFIG[id].url; el.target = URL_CONFIG[id].target; }
+            }
+            lucide.createIcons();
+            fetchAnnouncements(); fetchNews(); fetchEvents();
         });
     </script>
 </body>
